@@ -15,5 +15,8 @@ jobs:
           java-version: 1.8
       - name: Build with Maven
         run: mvn -B clean package --file pom.xml -DskipTests
-      - name: deploy
-        run: mvn deploy -Dregistry=https://maven.pkg.github.com/ggg17226 -Dtoken=${{ secrets.GITHUB_TOKEN }} -DskipTests
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: target
+          path: target
