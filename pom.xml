@@ -7,9 +7,32 @@
     <groupId>cn.aghost</groupId>
     <artifactId>xmpush-server-api-http2</artifactId>
     <version>1.0.5.01</version>
+    <packaging>jar</packaging>
+    <name>xiaomi push java sdk</name>
     <description>
         根据小米官方java-sdk-http2的1.0.5版本反编译后修改而成
     </description>
+    <url>https://github.com/ggg17226/xmpush-server-api-http2</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo,manual</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>aghost yang</name>
+            <email>ggg17226@gmail.com</email>
+            <organization>aghost</organization>
+            <url>https://github.com/ggg17226</url>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:https://github.com/ggg17226/xmpush-server-api-http2.git</connection>
+        <developerConnection>scm:git:https://github.com/ggg17226/xmpush-server-api-http2.git</developerConnection>
+        <url>https://github.com/ggg17226/xmpush-server-api-http2</url>
+    </scm>
     <properties>
         <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
@@ -80,7 +103,7 @@
 
     </dependencies>
     <build>
-        <finalName>MiPush_SDK_Server_Http2_${project.version}</finalName>
+        <!--        <finalName>MiPush_SDK_Server_Http2_${project.version}</finalName>-->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -98,7 +121,36 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam><!-- 添加这个压制JavaDoc检查 -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -128,4 +180,16 @@
             </plugin>
         </plugins>
     </build>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <name>ossrh snapshot</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <name>ossrh release</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
 </project>
