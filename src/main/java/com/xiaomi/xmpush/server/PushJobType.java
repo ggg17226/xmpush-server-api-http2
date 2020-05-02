@@ -16,20 +16,16 @@ public enum PushJobType {
   Miid((byte) 12),
   BatchMiid((byte) 13);
 
-  private final byte value;
-
-  private static PushJobType[] VALID_JOB_TYPES;
+  private static final PushJobType[] VALID_JOB_TYPES;
 
   static {
     VALID_JOB_TYPES = new PushJobType[] {Topic, Common, Alias, UserAccount, ImeiMd5, Miid};
   }
 
+  private final byte value;
+
   PushJobType(byte value) {
     this.value = value;
-  }
-
-  public byte value() {
-    return this.value;
   }
 
   public static PushJobType from(byte value) {
@@ -37,5 +33,9 @@ public enum PushJobType {
       if (type.value == value) return type;
     }
     return Invalid;
+  }
+
+  public byte value() {
+    return this.value;
   }
 }

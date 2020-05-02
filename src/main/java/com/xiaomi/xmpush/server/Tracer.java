@@ -1,6 +1,7 @@
 package com.xiaomi.xmpush.server;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public class Tracer extends PushSender<Tracer> {
                     log.debug(
                         "Attempt #" + executionCount + " to get status of message group " + jobKey);
                   }));
-      if (XMStringUtils.isBlank(result)) throw exception(retries, null);
+      if (StringUtils.isBlank(result)) throw exception(retries, null);
     } catch (Exception e) {
       throw exception(retries, e);
     }
@@ -53,7 +54,7 @@ public class Tracer extends PushSender<Tracer> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to get status of message " + msgId);
                   }));
-      if (XMStringUtils.isBlank(result)) throw exception(retries, null);
+      if (StringUtils.isBlank(result)) throw exception(retries, null);
     } catch (Exception e) {
       throw exception(retries, e);
     }
@@ -84,7 +85,7 @@ public class Tracer extends PushSender<Tracer> {
                             + " and "
                             + endTime);
                   }));
-      if (XMStringUtils.isBlank(result)) throw exception(retries, null);
+      if (StringUtils.isBlank(result)) throw exception(retries, null);
     } catch (Exception e) {
       throw exception(retries, e);
     }

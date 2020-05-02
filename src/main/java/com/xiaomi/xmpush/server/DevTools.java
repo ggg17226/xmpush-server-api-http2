@@ -1,6 +1,7 @@
 package com.xiaomi.xmpush.server;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,7 +38,7 @@ public class DevTools extends PushSender<DevTools> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to get all aliases of the device.");
                   }));
-      if (XMStringUtils.isBlank(result)) throw exception(retries, null);
+      if (StringUtils.isBlank(result)) throw exception(retries, null);
     } catch (Exception e) {
       throw exception(retries, e);
     }
@@ -63,7 +64,7 @@ public class DevTools extends PushSender<DevTools> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to get all topics of the device.");
                   }));
-      if (XMStringUtils.isBlank(result)) throw exception(retries, null);
+      if (StringUtils.isBlank(result)) throw exception(retries, null);
     } catch (Exception e) {
       throw exception(retries, e);
     }
@@ -90,7 +91,7 @@ public class DevTools extends PushSender<DevTools> {
                     log.debug(
                         "Attempt #" + executionCount + " to get all user account of the device.");
                   }));
-      if (XMStringUtils.isBlank(result)) throw exception(retries, null);
+      if (StringUtils.isBlank(result)) throw exception(retries, null);
     } catch (Exception e) {
       throw exception(retries, e);
     }
@@ -120,7 +121,7 @@ public class DevTools extends PushSender<DevTools> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to get presence of the device.");
                   }));
-      if (XMStringUtils.isBlank(result)) throw exception(retries, null);
+      if (StringUtils.isBlank(result)) throw exception(retries, null);
     } catch (Exception e) {
       throw exception(retries, e);
     }

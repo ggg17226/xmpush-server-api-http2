@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class NameValuePairs {
-  private List<NameValuePair> pairs = new ArrayList<>();
+  private final List<NameValuePair> pairs = new ArrayList<>();
 
   public List<NameValuePair> getPairs() {
     return this.pairs;
@@ -48,9 +48,9 @@ public class NameValuePairs {
   }
 
   public static class NameValuePair {
-    private String name;
+    private final String name;
 
-    private Object[] values;
+    private final Object[] values;
 
     public NameValuePair(String name, Object[] values) {
       this.name = name;

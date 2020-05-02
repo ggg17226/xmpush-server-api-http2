@@ -1,5 +1,7 @@
 package com.xiaomi.xmpush.server;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 
 public abstract class AbstractClient {
@@ -102,7 +104,7 @@ public abstract class AbstractClient {
 
     default String header(String name, String defaultValue) {
       String value = header(name);
-      return XMStringUtils.isBlank(value) ? defaultValue : value;
+      return StringUtils.isBlank(value) ? defaultValue : value;
     }
   }
 

@@ -404,9 +404,9 @@ public class Constants {
     V1_STOP_MESSAGE_BY_ID("/v1/message/switch/stop_by_id"),
     V1_STOP_MESSAGE_BY_JOBKEY("/v1/message/switch/stop_by_jobkey");
 
-    private String path;
+    private final String path;
 
-    private Constants.XmPushRequestType requestType;
+    private final Constants.XmPushRequestType requestType;
 
     XmPushRequestPath(String path) {
       this.path = path;

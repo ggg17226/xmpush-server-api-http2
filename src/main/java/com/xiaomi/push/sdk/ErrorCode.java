@@ -9,9 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class ErrorCode {
-  private int value;
-  private String description;
-  private static HashMap<Integer, ErrorCode> intErrorCodeMap = createIntegerErrorCodeMapping();
+  private static final HashMap<Integer, ErrorCode> intErrorCodeMap = createIntegerErrorCodeMapping();
   public static ErrorCode UnknowError = valueOf(-1, "未知错误");
   public static ErrorCode Success = valueOf(0, "成功");
   public static ErrorCode NotBlank = valueOf(100, "参数不能为空");
@@ -58,6 +56,17 @@ public class ErrorCode {
   public static ErrorCode TooManyApplicationNotification = valueOf(22101, "太多应用通知消息");
   public static ErrorCode SendApplicationNotificationFail = valueOf(22102, "发送应用通知消息失败");
   public static ErrorCode InvalidNotifyId = valueOf(22103, "应用通知ID不合法");
+  private int value;
+  private String description;
+
+  private ErrorCode(int value) {
+    this.value = value;
+  }
+
+  private ErrorCode(int value, String description) {
+    this.value = value;
+    this.description = description;
+  }
 
   private static HashMap<Integer, ErrorCode> createIntegerErrorCodeMapping() {
     HashMap<Integer, ErrorCode> result = new HashMap();
@@ -68,13 +77,23 @@ public class ErrorCode {
     return intErrorCodeMap.values();
   }
 
-  private ErrorCode(int value) {
-    this.value = value;
+  public static ErrorCode valueOf(int value) {
+    return intErrorCodeMap.get(value);
   }
 
-  private ErrorCode(int value, String description) {
-    this.value = value;
-    this.description = description;
+  public static ErrorCode valueOf(int value, ErrorCode defaultIfMissing) {
+    ErrorCode code = intErrorCodeMap.get(value);
+    return code == null ? defaultIfMissing : code;
+  }
+
+  public static ErrorCode valueOf(Integer code, String reason) {
+    ErrorCode result = intErrorCodeMap.get(code);
+    if (result == null) {
+      result = new ErrorCode(code, reason);
+      intErrorCodeMap.put(code, result);
+    }
+
+    return result;
   }
 
   public String toString() {
@@ -103,24 +122,5 @@ public class ErrorCode {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public static ErrorCode valueOf(int value) {
-    return intErrorCodeMap.get(value);
-  }
-
-  public static ErrorCode valueOf(int value, ErrorCode defaultIfMissing) {
-    ErrorCode code = intErrorCodeMap.get(value);
-    return code == null ? defaultIfMissing : code;
-  }
-
-  public static ErrorCode valueOf(Integer code, String reason) {
-    ErrorCode result = intErrorCodeMap.get(code);
-    if (result == null) {
-      result = new ErrorCode(code, reason);
-      intErrorCodeMap.put(code, result);
-    }
-
-    return result;
   }
 }

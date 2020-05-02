@@ -2,6 +2,7 @@ package com.xiaomi.xmpush.server;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.net.ssl.*;
 import java.io.*;
@@ -188,10 +189,10 @@ public class HttpBase {
   }
 
   public static void setProxy(String host, int port, String authUser, String authPassword) {
-    if (XMStringUtils.isBlank(host) || port <= 0)
+    if (StringUtils.isBlank(host) || port <= 0)
       throw new IllegalArgumentException("proxy host or port invalid.");
     useProxy = true;
-    needAuth = (!XMStringUtils.isBlank(authUser) && !XMStringUtils.isBlank(authPassword));
+    needAuth = (StringUtils.isNotBlank(authUser) && StringUtils.isNotBlank(authPassword));
     proxyHost = host;
     proxyPort = port;
     user = authUser;

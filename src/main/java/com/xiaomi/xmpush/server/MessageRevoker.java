@@ -1,6 +1,7 @@
 package com.xiaomi.xmpush.server;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -26,17 +27,17 @@ public class MessageRevoker extends HttpBase {
       int retries)
       throws IOException {
     StringBuilder body = new StringBuilder();
-    if (!XMStringUtils.isEmpty(packageName))
+    if (StringUtils.isNotEmpty(packageName))
       addParameter(body, "restricted_package_name", URLEncoder.encode(packageName, "UTF-8"));
-    if (!XMStringUtils.isEmpty(title))
+    if (StringUtils.isNotEmpty(title))
       addParameter(body, "title", URLEncoder.encode(title, "UTF-8"));
-    if (!XMStringUtils.isEmpty(description))
+    if (StringUtils.isNotEmpty(description))
       addParameter(body, "description", URLEncoder.encode(description, "UTF-8"));
-    if (!XMStringUtils.isEmpty(Integer.toString(notifyId)))
+    if (StringUtils.isNotEmpty(Integer.toString(notifyId)))
       addParameter(body, "notify_id", URLEncoder.encode(Integer.toString(notifyId), "UTF-8"));
     if (topics != null && topics.length != 0)
       for (String topic : topics) addParameter(body, "topics", URLEncoder.encode(topic, "UTF-8"));
-    if (!XMStringUtils.isEmpty(msgId))
+    if (StringUtils.isNotEmpty(msgId))
       addParameter(body, "msg_id", URLEncoder.encode(msgId, "UTF-8"));
     String strBody = body.toString();
     int attempt = 0;

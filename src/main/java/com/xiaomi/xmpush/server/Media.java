@@ -1,5 +1,7 @@
 package com.xiaomi.xmpush.server;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -21,7 +23,7 @@ public class Media extends PushSender<Media> {
     try {
       String response =
           upload(Constants.XmPushRequestPath.MEDIA_UPLOAD_IMAGE, file, null, queryParams, null);
-      if (XMStringUtils.isBlank(response)) throw exception(1, null);
+      if (StringUtils.isBlank(response)) throw exception(1, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(1, e);
@@ -34,7 +36,7 @@ public class Media extends PushSender<Media> {
     try {
       String response =
           upload(Constants.XmPushRequestPath.MEDIA_UPLOAD_SMALLICON, file, null, null, null);
-      if (XMStringUtils.isBlank(response)) throw exception(1, null);
+      if (StringUtils.isBlank(response)) throw exception(1, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(1, e);
@@ -49,7 +51,7 @@ public class Media extends PushSender<Media> {
     try {
       String response =
           get(Constants.XmPushRequestPath.MEDIA_UPLOAD_SMALLICON_QUERY, null, queryParams, null);
-      if (XMStringUtils.isBlank(response)) throw exception(1, null);
+      if (StringUtils.isBlank(response)) throw exception(1, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(1, e);

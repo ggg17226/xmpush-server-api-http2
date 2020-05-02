@@ -81,7 +81,7 @@ public class OkHttp3Client extends AbstractClient {
           .forEach(
               header -> {
                 if (header.getValues() != null)
-                  Arrays.<Object>stream(header.getValues())
+                  Arrays.stream(header.getValues())
                       .filter(Objects::nonNull)
                       .forEach(h -> {});
               });
@@ -89,7 +89,7 @@ public class OkHttp3Client extends AbstractClient {
       if (response.code() >= 500)
         log.debug("XmPush service is unavailable (status " + response.code() + ")");
       return new AbstractClient.ResponseWrapper() {
-        byte[] content = response.body().bytes();
+        final byte[] content = response.body().bytes();
 
         public int status() {
           return response.code();
@@ -114,8 +114,8 @@ public class OkHttp3Client extends AbstractClient {
           try {
             Method setProtocolMethod =
                 SSLParameters.class.getMethod(
-                    "setApplicationProtocols", new Class[] {String[].class});
-            Method method1 = SSLSocket.class.getMethod("getApplicationProtocol", new Class[0]);
+                    "setApplicationProtocols", String[].class);
+            Method method1 = SSLSocket.class.getMethod("getApplicationProtocol");
           } catch (NoSuchMethodException e) {
             try {
               Class.forName("org.conscrypt.Conscrypt");
@@ -128,7 +128,7 @@ public class OkHttp3Client extends AbstractClient {
               .readTimeout(this.readTimeout, TimeUnit.MILLISECONDS)
               .writeTimeout(this.writeTimeout, TimeUnit.MILLISECONDS)
               .retryOnConnectionFailure(true)
-              .protocols(Arrays.asList(new Protocol[] {Protocol.HTTP_2, Protocol.HTTP_1_1}));
+              .protocols(Arrays.asList(Protocol.HTTP_2, Protocol.HTTP_1_1));
           if (this.useProxy) {
             System.setProperty("sun.security.ssl.allowUnsafeRenegotiation", "true");
             clientBuilder.proxy(

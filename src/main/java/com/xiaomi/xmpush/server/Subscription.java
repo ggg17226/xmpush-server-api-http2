@@ -1,6 +1,7 @@
 package com.xiaomi.xmpush.server;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class Subscription extends PushSender<Subscription> {
 
   public Result subscribeTopic(String regId, String topic, String category, int retries)
       throws IOException, ParseException {
-    return subscribeTopic(Arrays.asList(new String[] {regId}), topic, category, retries);
+    return subscribeTopic(Arrays.asList(regId), topic, category, retries);
   }
 
   public Result subscribeTopic(
@@ -90,7 +91,7 @@ public class Subscription extends PushSender<Subscription> {
       String regId, String topic, String packageName, String category, int retries)
       throws IOException, ParseException {
     return unsubscribeTopic(
-        Arrays.asList(new String[] {regId}), topic, packageName, category, retries);
+        Arrays.asList(regId), topic, packageName, category, retries);
   }
 
   public Result unsubscribeTopic(String regId, String topic, String category)
@@ -131,7 +132,7 @@ public class Subscription extends PushSender<Subscription> {
                             + " for aliases "
                             + aliases);
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -147,7 +148,7 @@ public class Subscription extends PushSender<Subscription> {
         (new NameValuePairs())
             .nameAndValue("aliases", String.join(",", aliases))
             .nameAndValue("topic", topic);
-    if (!XMStringUtils.isBlank(packageName))
+    if (!StringUtils.isBlank(packageName))
       body.nameAndValue("restricted_package_name", packageName);
     if (category != null) body.nameAndValue("category", category);
     try {
@@ -169,7 +170,7 @@ public class Subscription extends PushSender<Subscription> {
                             + " for aliases "
                             + aliases);
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -205,7 +206,7 @@ public class Subscription extends PushSender<Subscription> {
                             + " for aliases "
                             + aliases);
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -221,7 +222,7 @@ public class Subscription extends PushSender<Subscription> {
         (new NameValuePairs())
             .nameAndValue("aliases", String.join(",", aliases))
             .nameAndValue("topic", topic);
-    if (!XMStringUtils.isBlank(packageName))
+    if (!StringUtils.isBlank(packageName))
       body.nameAndValue("restricted_package_name", packageName);
     if (category != null) body.nameAndValue("category", category);
     try {
@@ -243,7 +244,7 @@ public class Subscription extends PushSender<Subscription> {
                             + " for aliases "
                             + aliases);
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -287,7 +288,7 @@ public class Subscription extends PushSender<Subscription> {
                             + " to regIds "
                             + regIdsStr);
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -309,7 +310,7 @@ public class Subscription extends PushSender<Subscription> {
         (new NameValuePairs())
             .nameAndValue("registration_id", regIdsStr)
             .nameAndValue("topic", topic);
-    if (!XMStringUtils.isBlank(packageName))
+    if (!StringUtils.isBlank(packageName))
       body.nameAndValue("restricted_package_name", packageName);
     if (category != null) body.nameAndValue("category", category);
     try {
@@ -338,7 +339,7 @@ public class Subscription extends PushSender<Subscription> {
                             + " to regIds "
                             + regIdsStr);
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);

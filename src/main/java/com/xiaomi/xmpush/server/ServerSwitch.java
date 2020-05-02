@@ -6,42 +6,42 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ServerSwitch {
   private static final long REFRESH_SERVER_HOST_INTERVAL = 300000L;
 
-  private static Server defaultServer = new Server(Constants.HOST_PRODUCTION, 1, 90, 10, 5);
+  private static final Server defaultServer = new Server(Constants.HOST_PRODUCTION, 1, 90, 10, 5);
 
-  private static ServerSwitch INSTANCE = new ServerSwitch();
+  private static final ServerSwitch INSTANCE = new ServerSwitch();
 
-  private static Random random = new Random(System.currentTimeMillis());
+  private static final Random random = new Random(System.currentTimeMillis());
 
   private Server[] servers;
 
-  private Server feedback = new Server(Constants.HOST_PRODUCTION_FEEDBACK, 100, 100, 0, 0);
+  private final Server feedback = new Server(Constants.HOST_PRODUCTION_FEEDBACK, 100, 100, 0, 0);
 
-  private Server sandbox = new Server(Constants.HOST_SANDBOX, 100, 100, 0, 0);
+  private final Server sandbox = new Server(Constants.HOST_SANDBOX, 100, 100, 0, 0);
 
-  private Server specified = new Server(Constants.host, 100, 100, 0, 0);
+  private final Server specified = new Server(Constants.host, 100, 100, 0, 0);
 
-  private Server emq = new Server(Constants.HOST_EMQ, 100, 100, 0, 0);
+  private final Server emq = new Server(Constants.HOST_EMQ, 100, 100, 0, 0);
 
-  private Server messageGlobal = new Server(Constants.HOST_GLOBAL_PRODUCTION, 100, 100, 0, 0);
+  private final Server messageGlobal = new Server(Constants.HOST_GLOBAL_PRODUCTION, 100, 100, 0, 0);
 
-  private Server feedbackGlobal =
+  private final Server feedbackGlobal =
       new Server(Constants.HOST_GLOBAL_PRODUCTION_FEEDBACK, 100, 100, 0, 0);
 
-  private Server messageEurope = new Server(Constants.HOST_EUROPE_PRODUCTION, 100, 100, 0, 0);
+  private final Server messageEurope = new Server(Constants.HOST_EUROPE_PRODUCTION, 100, 100, 0, 0);
 
-  private Server messageVip = new Server(Constants.HOST_VIP, 100, 100, 0, 0);
+  private final Server messageVip = new Server(Constants.HOST_VIP, 100, 100, 0, 0);
 
-  private Server feedbackEurope =
+  private final Server feedbackEurope =
       new Server(Constants.HOST_EUROPE_PRODUCTION_FEEDBACK, 100, 100, 0, 0);
 
-  private Server messageRussia = new Server(Constants.HOST_RUSSIA_PRODUCTION, 100, 100, 0, 0);
+  private final Server messageRussia = new Server(Constants.HOST_RUSSIA_PRODUCTION, 100, 100, 0, 0);
 
-  private Server feedbackRussia =
+  private final Server feedbackRussia =
       new Server(Constants.HOST_RUSSIA_PRODUCTION_FEEDBACK, 100, 100, 0, 0);
 
-  private Server messageIndia = new Server(Constants.HOST_INDIA_PRODUCTION, 100, 100, 0, 0);
+  private final Server messageIndia = new Server(Constants.HOST_INDIA_PRODUCTION, 100, 100, 0, 0);
 
-  private Server feedbackIndia =
+  private final Server feedbackIndia =
       new Server(Constants.HOST_INDIA_PRODUCTION_FEEDBACK, 100, 100, 0, 0);
 
   private boolean inited = false;
@@ -147,15 +147,15 @@ public class ServerSwitch {
   public static class Server {
     private String host;
 
-    private AtomicInteger priority;
+    private final AtomicInteger priority;
 
-    private int minPriority;
+    private final int minPriority;
 
-    private int maxPriority;
+    private final int maxPriority;
 
-    private int decrStep;
+    private final int decrStep;
 
-    private int incrStep;
+    private final int incrStep;
 
     Server(String host, int minPriority, int maxPriority, int decrStep, int incrStep) {
       this.host = host;

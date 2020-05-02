@@ -2,6 +2,7 @@ package com.xiaomi.xmpush.server;
 
 import com.xiaomi.push.sdk.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -44,7 +45,7 @@ public class Sender extends PushSender<Sender> {
   }
 
   protected static void tryAddJson(JSONObject json, String parameterName, Object value) {
-    if (!XMStringUtils.isEmpty(parameterName) && value != null) json.put(parameterName, value);
+    if (!StringUtils.isEmpty(parameterName) && value != null) json.put(parameterName, value);
   }
 
   private static boolean isMultiPackageName(Message message) {
@@ -77,7 +78,7 @@ public class Sender extends PushSender<Sender> {
                             + " to regIds "
                             + registrationId);
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -110,7 +111,7 @@ public class Sender extends PushSender<Sender> {
                             + " to regIds "
                             + registrationIds);
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -145,7 +146,7 @@ public class Sender extends PushSender<Sender> {
                             + " to regIds "
                             + registrationId);
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -190,7 +191,7 @@ public class Sender extends PushSender<Sender> {
                             + " to topic: "
                             + topic);
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -231,7 +232,7 @@ public class Sender extends PushSender<Sender> {
                             + " op="
                             + topicOp.toString());
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       Result result = parseResult(response);
       return result;
     } catch (Exception e) {
@@ -261,7 +262,7 @@ public class Sender extends PushSender<Sender> {
                     log.debug(
                         "Attempt #" + retries + " to broadcast message " + message + " to all.");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -301,7 +302,7 @@ public class Sender extends PushSender<Sender> {
                             + String.join(",", aliases)
                             + "].");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -334,7 +335,7 @@ public class Sender extends PushSender<Sender> {
                             + String.join(",", regions)
                             + "]");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -387,7 +388,7 @@ public class Sender extends PushSender<Sender> {
                             + String.join(",", userAccounts)
                             + "].");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -446,7 +447,7 @@ public class Sender extends PushSender<Sender> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to revoke alias message!");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(0, null);
+      if (StringUtils.isBlank(response)) throw exception(0, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(0, e);
@@ -475,7 +476,7 @@ public class Sender extends PushSender<Sender> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to revoke regid message!");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(0, null);
+      if (StringUtils.isBlank(response)) throw exception(0, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(0, e);
@@ -505,7 +506,7 @@ public class Sender extends PushSender<Sender> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to revoke user account message!");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(0, null);
+      if (StringUtils.isBlank(response)) throw exception(0, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(0, e);
@@ -534,7 +535,7 @@ public class Sender extends PushSender<Sender> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to revoke miid message!");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(0, null);
+      if (StringUtils.isBlank(response)) throw exception(0, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(0, e);
@@ -563,7 +564,7 @@ public class Sender extends PushSender<Sender> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to revoke imeimd5 message!");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(0, null);
+      if (StringUtils.isBlank(response)) throw exception(0, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(0, e);
@@ -592,7 +593,7 @@ public class Sender extends PushSender<Sender> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to revoke topic message!");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(0, null);
+      if (StringUtils.isBlank(response)) throw exception(0, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(0, e);
@@ -623,7 +624,7 @@ public class Sender extends PushSender<Sender> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to revoke multi topic message!");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(0, null);
+      if (StringUtils.isBlank(response)) throw exception(0, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(0, e);
@@ -650,7 +651,7 @@ public class Sender extends PushSender<Sender> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to revoke multi topic message!");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(0, null);
+      if (StringUtils.isBlank(response)) throw exception(0, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(0, e);
@@ -677,7 +678,7 @@ public class Sender extends PushSender<Sender> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to revoke multi topic message!");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(0, null);
+      if (StringUtils.isBlank(response)) throw exception(0, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(0, e);
@@ -731,7 +732,7 @@ public class Sender extends PushSender<Sender> {
                     log.debug(
                         "Attempt #" + executionCount + " to send messages " + messages.size());
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -749,7 +750,7 @@ public class Sender extends PushSender<Sender> {
               null,
               null,
               null);
-      if (XMStringUtils.isBlank(response)) throw exception(1, null);
+      if (StringUtils.isBlank(response)) throw exception(1, null);
       return parseResult(response);
     } catch (Exception e) {
       throw exception(1, e);
@@ -766,7 +767,7 @@ public class Sender extends PushSender<Sender> {
               null,
               null,
               null);
-      if (XMStringUtils.isBlank(response)) throw exception(1, null);
+      if (StringUtils.isBlank(response)) throw exception(1, null);
       return parseResult(response);
     } catch (Exception e) {
       throw exception(1, e);
@@ -783,7 +784,7 @@ public class Sender extends PushSender<Sender> {
               null,
               null,
               null);
-      if (XMStringUtils.isBlank(response)) throw exception(1, null);
+      if (StringUtils.isBlank(response)) throw exception(1, null);
       return parseResult(response);
     } catch (Exception e) {
       throw exception(1, e);

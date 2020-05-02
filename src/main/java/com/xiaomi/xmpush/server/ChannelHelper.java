@@ -1,6 +1,7 @@
 package com.xiaomi.xmpush.server;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class ChannelHelper extends PushSender<ChannelHelper> {
                     log.debug(
                         "Attempt #" + executionCount + " to add channel " + channelInfo.toString());
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -65,7 +66,7 @@ public class ChannelHelper extends PushSender<ChannelHelper> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to discard channel " + channelId);
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);
@@ -88,7 +89,7 @@ public class ChannelHelper extends PushSender<ChannelHelper> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to get channel list");
                   }));
-      if (XMStringUtils.isBlank(response)) throw exception(retries, null);
+      if (StringUtils.isBlank(response)) throw exception(retries, null);
       result = parseResult(response);
     } catch (Exception e) {
       throw exception(retries, e);

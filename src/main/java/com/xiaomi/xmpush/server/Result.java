@@ -18,44 +18,6 @@ public final class Result implements Serializable {
 
   private final String reason;
 
-  public static final class Builder {
-    private String messageId;
-
-    private String traceId = null;
-
-    private JSONObject data;
-
-    private ErrorCode errorCode;
-
-    private String reason;
-
-    public Result fromJson(JSONObject json) {
-      if (json.containsKey("data")) this.data = (JSONObject) json.get("data");
-      this.reason = (String) json.get("reason");
-      Integer code = Integer.valueOf(((Long) json.get("code")).intValue());
-      this.errorCode = ErrorCode.valueOf(code, this.reason);
-      this.messageId = (this.data == null) ? null : (String) this.data.get("id");
-      if (json.containsKey("trace_id")) this.traceId = (String) json.get("trace_id");
-      if ((this.messageId == null || this.messageId.length() == 0) && this.traceId != null)
-        this.messageId = (String) json.get("trace_id");
-      return build();
-    }
-
-    public Builder messageId(String msgId) {
-      this.messageId = msgId;
-      return this;
-    }
-
-    public Builder errorCode(ErrorCode value) {
-      this.errorCode = value;
-      return this;
-    }
-
-    public Result build() {
-      return new Result(this);
-    }
-  }
-
   private Result(Builder builder) {
     this.messageId = builder.messageId;
     this.data = builder.data;
@@ -94,5 +56,43 @@ public final class Result implements Serializable {
     if (this.data != null) builder.append(" data=").append(this.data.toString());
     if (this.traceId != null) builder.append(" trace_id=").append(this.traceId);
     return builder.append(" ]").toString();
+  }
+
+  public static final class Builder {
+    private String messageId;
+
+    private String traceId = null;
+
+    private JSONObject data;
+
+    private ErrorCode errorCode;
+
+    private String reason;
+
+    public Result fromJson(JSONObject json) {
+      if (json.containsKey("data")) this.data = (JSONObject) json.get("data");
+      this.reason = (String) json.get("reason");
+      Integer code = Integer.valueOf(((Long) json.get("code")).intValue());
+      this.errorCode = ErrorCode.valueOf(code, this.reason);
+      this.messageId = (this.data == null) ? null : (String) this.data.get("id");
+      if (json.containsKey("trace_id")) this.traceId = (String) json.get("trace_id");
+      if ((this.messageId == null || this.messageId.length() == 0) && this.traceId != null)
+        this.messageId = (String) json.get("trace_id");
+      return build();
+    }
+
+    public Builder messageId(String msgId) {
+      this.messageId = msgId;
+      return this;
+    }
+
+    public Builder errorCode(ErrorCode value) {
+      this.errorCode = value;
+      return this;
+    }
+
+    public Result build() {
+      return new Result(this);
+    }
   }
 }

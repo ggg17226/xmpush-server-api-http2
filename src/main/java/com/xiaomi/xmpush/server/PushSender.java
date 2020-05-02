@@ -2,6 +2,7 @@ package com.xiaomi.xmpush.server;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -117,21 +118,6 @@ public abstract class PushSender<T extends PushSender> {
     this.isVip = false;
   }
 
-  public T connectTimeout(int connectTimeout) {
-    this.connectTimeout = connectTimeout;
-    return (T) this;
-  }
-
-  public T readTimeout(int readTimeout) {
-    this.readTimeout = readTimeout;
-    return (T) this;
-  }
-
-  public T writeTimeout(int writeTimeout) {
-    this.writeTimeout = writeTimeout;
-    return (T) this;
-  }
-
   private static String getLocalHostName() {
     String host = null;
     try {
@@ -147,10 +133,10 @@ public abstract class PushSender<T extends PushSender> {
   }
 
   public static void setProxy(String host, int port, String authUser, String authPassword) {
-    if (XMStringUtils.isBlank(host) || port <= 0)
+    if (StringUtils.isBlank(host) || port <= 0)
       throw new IllegalArgumentException("proxy host or port invalid.");
     useProxy = true;
-    needAuth = (!XMStringUtils.isBlank(authUser) && !XMStringUtils.isBlank(authPassword));
+    needAuth = (!StringUtils.isBlank(authUser) && !StringUtils.isBlank(authPassword));
     proxyHost = host;
     proxyPort = port;
     user = authUser;
@@ -160,6 +146,21 @@ public abstract class PushSender<T extends PushSender> {
   public static void unsetProxy() {
     useProxy = false;
     needAuth = false;
+  }
+
+  public T connectTimeout(int connectTimeout) {
+    this.connectTimeout = connectTimeout;
+    return (T) this;
+  }
+
+  public T readTimeout(int readTimeout) {
+    this.readTimeout = readTimeout;
+    return (T) this;
+  }
+
+  public T writeTimeout(int writeTimeout) {
+    this.writeTimeout = writeTimeout;
+    return (T) this;
   }
 
   void sleep(long millis) {
@@ -446,6 +447,10 @@ public abstract class PushSender<T extends PushSender> {
     CostTooMuchTime
   }
 
+  private interface SenderAction<T, R> {
+    R action(T param1T) throws Exception;
+  }
+
   protected static class SenderContext {
     private ServerSwitch.Server server;
 
@@ -457,7 +462,7 @@ public abstract class PushSender<T extends PushSender> {
 
     private AbstractClient.ResponseWrapper responseWrapper;
 
-    private Map<String, Object> extra = new HashMap<>();
+    private final Map<String, Object> extra = new HashMap<>();
 
     protected ServerSwitch.Server server() {
       return this.server;
@@ -484,7 +489,7 @@ public abstract class PushSender<T extends PushSender> {
     }
 
     protected static class Builder {
-      private PushSender.SenderContext context = new PushSender.SenderContext();
+      private final PushSender.SenderContext context = new PushSender.SenderContext();
 
       Builder server(ServerSwitch.Server server) {
         this.context.server = server;
@@ -523,7 +528,7 @@ public abstract class PushSender<T extends PushSender> {
   }
 
   protected static class Builder {
-    private PushSender.SenderContext context;
+    private final PushSender.SenderContext context;
 
     protected Builder() {
       this.context = new PushSender.SenderContext();
@@ -565,13 +570,13 @@ public abstract class PushSender<T extends PushSender> {
   }
 
   public class DefaultPushRetryHandler implements RetryHandler {
-    private int retries;
+    private final int retries;
 
     private int backoff;
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
-    private Consumer<Integer> consumer;
+    private final Consumer<Integer> consumer;
 
     public DefaultPushRetryHandler(int retries, int backoff, Consumer<Integer> consumer) {
       this.retries = retries;
@@ -596,9 +601,5 @@ public abstract class PushSender<T extends PushSender> {
       }
       return retry;
     }
-  }
-
-  private interface SenderAction<T, R> {
-    R action(T param1T) throws Exception;
   }
 }

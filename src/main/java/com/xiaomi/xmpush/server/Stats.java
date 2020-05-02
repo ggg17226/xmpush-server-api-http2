@@ -1,6 +1,7 @@
 package com.xiaomi.xmpush.server;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 
@@ -42,7 +43,7 @@ public class Stats extends PushSender<Stats> {
                             + " and "
                             + endDate);
                   }));
-      if (XMStringUtils.isBlank(result)) throw exception(retries, null);
+      if (StringUtils.isBlank(result)) throw exception(retries, null);
     } catch (Exception e) {
       throw exception(retries, e);
     }

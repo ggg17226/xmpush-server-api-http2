@@ -1,6 +1,7 @@
 package com.xiaomi.xmpush.server;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,7 +34,7 @@ public class Feedback extends PushSender<Feedback> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to get invalid registration ids");
                   }));
-      if (XMStringUtils.isBlank(result)) throw exception(retries, null);
+      if (StringUtils.isBlank(result)) throw exception(retries, null);
     } catch (Exception e) {
       throw exception(retries, e);
     }
@@ -55,7 +56,7 @@ public class Feedback extends PushSender<Feedback> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to get invalid registration ids");
                   }));
-      if (XMStringUtils.isBlank(result)) throw exception(retries, null);
+      if (StringUtils.isBlank(result)) throw exception(retries, null);
     } catch (Exception e) {
       throw exception(retries, e);
     }
@@ -79,7 +80,7 @@ public class Feedback extends PushSender<Feedback> {
                   executionCount -> {
                     log.debug("Attempt #" + executionCount + " to get region by regid");
                   }));
-      if (XMStringUtils.isBlank(result)) throw exception(retries, null);
+      if (StringUtils.isBlank(result)) throw exception(retries, null);
     } catch (Exception e) {
       throw exception(retries, e);
     }

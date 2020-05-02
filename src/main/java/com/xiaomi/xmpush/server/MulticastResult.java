@@ -18,38 +18,6 @@ public final class MulticastResult implements Serializable {
 
   private final List<Long> retryMulticastIds;
 
-  public static final class Builder {
-    private final List<Result> results = new ArrayList<>();
-
-    private final int success;
-
-    private final int failure;
-
-    private final long multicastId;
-
-    private List<Long> retryMulticastIds;
-
-    public Builder(int success, int failure, long multicastId) {
-      this.success = success;
-      this.failure = failure;
-      this.multicastId = multicastId;
-    }
-
-    public Builder addResult(Result result) {
-      this.results.add(result);
-      return this;
-    }
-
-    public Builder retryMulticastIds(List<Long> retryMulticastIds) {
-      this.retryMulticastIds = retryMulticastIds;
-      return this;
-    }
-
-    public MulticastResult build() {
-      return new MulticastResult(this);
-    }
-  }
-
   private MulticastResult(Builder builder) {
     this.success = builder.success;
     this.failure = builder.failure;
@@ -101,5 +69,37 @@ public final class MulticastResult implements Serializable {
             .append(",");
     if (!this.results.isEmpty()) builder.append("results: ").append(this.results);
     return builder.toString();
+  }
+
+  public static final class Builder {
+    private final List<Result> results = new ArrayList<>();
+
+    private final int success;
+
+    private final int failure;
+
+    private final long multicastId;
+
+    private List<Long> retryMulticastIds;
+
+    public Builder(int success, int failure, long multicastId) {
+      this.success = success;
+      this.failure = failure;
+      this.multicastId = multicastId;
+    }
+
+    public Builder addResult(Result result) {
+      this.results.add(result);
+      return this;
+    }
+
+    public Builder retryMulticastIds(List<Long> retryMulticastIds) {
+      this.retryMulticastIds = retryMulticastIds;
+      return this;
+    }
+
+    public MulticastResult build() {
+      return new MulticastResult(this);
+    }
   }
 }

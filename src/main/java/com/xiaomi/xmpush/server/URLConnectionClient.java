@@ -65,7 +65,7 @@ public class URLConnectionClient extends AbstractClient {
           .forEach(
               header -> {
                 if (header.getValues() != null)
-                  Arrays.<Object>stream(header.getValues())
+                  Arrays.stream(header.getValues())
                       .filter(Objects::nonNull)
                       .forEach(h -> {});
               });
@@ -115,7 +115,7 @@ public class URLConnectionClient extends AbstractClient {
           .forEach(
               header -> {
                 if (header.getValues() != null)
-                  Arrays.<Object>stream(header.getValues())
+                  Arrays.stream(header.getValues())
                       .filter(Objects::nonNull)
                       .forEach(h -> {});
               });
