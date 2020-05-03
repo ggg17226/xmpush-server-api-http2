@@ -6,7 +6,7 @@
 
     <groupId>cn.aghost</groupId>
     <artifactId>xmpush-server-api-http2</artifactId>
-    <version>1.0.5.01</version>
+    <version>1.0.5.03</version>
     <packaging>jar</packaging>
     <name>xiaomi push java sdk</name>
     <description>
@@ -144,7 +144,7 @@
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
-                        <phase>verify</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>sign</goal>
                         </goals>
@@ -162,11 +162,6 @@
                     <verbose>true</verbose>
                     <encoding>UTF-8</encoding>
                     <skip>true</skip>
-                    <compilerArguments>
-                        <sourcepath>
-                            ${project.basedir}/src
-                        </sourcepath>
-                    </compilerArguments>
                 </configuration>
             </plugin>
 

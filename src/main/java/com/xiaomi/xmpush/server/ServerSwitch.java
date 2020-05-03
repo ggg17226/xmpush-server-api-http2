@@ -97,21 +97,23 @@ public class ServerSwitch {
   Server selectServer(Constants.RequestPath requestPath, Region region, boolean isVip) {
     if (Constants.host != null) return this.specified.setHost(Constants.host);
     if (Constants.sandbox) return this.sandbox;
-    switch (requestPath.getRequestType()) {
-      case FEEDBACK:
-        switch (region) {
-          case Europe:
-            return this.feedbackEurope;
-          case Russia:
-            return this.feedbackRussia;
-          case India:
-            return this.feedbackIndia;
-          case Other:
-            return this.feedbackGlobal;
-        }
-        return this.feedback;
-      case EMQ:
-        return this.emq;
+    if (requestPath.getRequestType() != null) {
+      switch (requestPath.getRequestType()) {
+        case FEEDBACK:
+          switch (region) {
+            case Europe:
+              return this.feedbackEurope;
+            case Russia:
+              return this.feedbackRussia;
+            case India:
+              return this.feedbackIndia;
+            case Other:
+              return this.feedbackGlobal;
+          }
+          return this.feedback;
+        case EMQ:
+          return this.emq;
+      }
     }
     if (isVip) return this.messageVip;
     switch (region) {

@@ -181,7 +181,15 @@ public abstract class PushSender<T extends PushSender> {
     return url;
   }
 
-  protected void before(SenderContext context) {}
+  protected void before(SenderContext context) {
+    NameValuePairs nameValuePairs = new NameValuePairs();
+    for (NameValuePairs.NameValuePair pair : context.headers.getPairs()) {
+      if (pair.getValues() != null && pair.getValues().length > 0) {
+        nameValuePairs.getPairs().add(pair);
+      }
+    }
+    context.headers = nameValuePairs;
+  }
 
   protected void after(SenderContext context) {}
 

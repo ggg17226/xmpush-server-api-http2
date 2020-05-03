@@ -83,7 +83,7 @@ public class OkHttp3Client extends AbstractClient {
                 if (header.getValues() != null)
                   Arrays.stream(header.getValues())
                       .filter(Objects::nonNull)
-                      .forEach(h -> {});
+                      .forEach(h -> requestBuilder.header(header.getName(), String.valueOf(h)));
               });
     try (Response response = getClient().newCall(requestBuilder.build()).execute()) {
       if (response.code() >= 500)
@@ -113,8 +113,7 @@ public class OkHttp3Client extends AbstractClient {
           OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
           try {
             Method setProtocolMethod =
-                SSLParameters.class.getMethod(
-                    "setApplicationProtocols", String[].class);
+                SSLParameters.class.getMethod("setApplicationProtocols", String[].class);
             Method method1 = SSLSocket.class.getMethod("getApplicationProtocol");
           } catch (NoSuchMethodException e) {
             try {
